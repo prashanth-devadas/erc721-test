@@ -17,4 +17,12 @@ contract Color is ERC721Full {
     _colorExists[_color] = true;
   }
 
+  // Adding burn function to remove NFT from circulation
+  function burn (string memory _color) public {
+    require(!_colorExists[_color]);
+    uint _id = colors.push(_color);
+    _burn(msg.sender, _id);
+    _colorExists[_color] = false;
+  }
+
 }
